@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MkvOL.Data;
 
@@ -47,11 +47,11 @@ namespace MkvOL.Controllers
             }
             var idParam = new SqlParameter
             {
-                ParameterName= "Codigo",
+                ParameterName = "Codigo",
                 Value = Codigo
             };
 
-            var stocksLocales = _context.StockLocales.FromSql("Stocks_Locales_Propios @Codigo", idParam).ToList();
+            var stocksLocales = _context.StockLocales.FromSqlRaw("Stocks_Locales_Propios @Codigo", idParam).ToList();
           
             return View(stocksLocales);
         }
