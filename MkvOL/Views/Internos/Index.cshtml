@@ -6,7 +6,7 @@
 
 @*Con bootstrap 4*@
 <link rel="stylesheet" href="~/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" media="screen"/>
 
 
 <p>
@@ -37,21 +37,24 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NroInterno)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Usuario)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Celular)
-                                </td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NroInterno)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Celular)
+                            </td>
+                            @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\SBS-Admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel")
+                            {
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class=" btn btn-warning"><i class="fas fa-pen"></i></a>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-align-justify"></i></a>|
                                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                 </td>
+                            }
                             </tr>
                         }
                     </tbody>
@@ -63,9 +66,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
     <script src="~/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
-    @*<script src="~/DataTables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js"></script>*@
     <script src="~/fontawesome/js/all.min.js"></script>
 
     <script type="text/javascript">

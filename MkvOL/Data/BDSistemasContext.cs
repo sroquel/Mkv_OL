@@ -13,5 +13,7 @@ namespace MkvOL.Data
         public DbSet<InternosEntity> Internos { get; set; }
         public DbSet<SectoresEntity> Sectores { get; set; }
         public DbSet<StocksLocalesEntity> StockLocales { get; set; }
+        public DbSet<VentaDiariaEntity> VentaDiaria { get; set; }
+
     }
 }

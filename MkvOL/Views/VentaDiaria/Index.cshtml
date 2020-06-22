@@ -1,0 +1,153 @@
+﻿@model IEnumerable<MkvOL.Data.Entities.VentaDiariaEntity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+<form id="prueba" asp-controller="VentaDiaria" method="post" class="form-control" role="form">
+    <label>Fecha</label>
+    <input type="date" id="fecha" name="fechaConsulta" width="276" value=@ViewData["Fecha"] />
+    <button type="submit">Aceptar</button>
+</form>
+
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Propios</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Propios" class="display-compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sucursal)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Importe)
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.CoSucursal > 100 & item.CoSucursal < 200)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sucursal)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Importe)
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Franquicias</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Franquicias" class="display-compact table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sucursal)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Importe)
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.CoSucursal > 200 & item.CoSucursal < 300)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sucursal)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Importe)
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table id="Ecommerce" class="display-compact table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sucursal)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Importe)
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.CoSucursal == 80)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sucursal)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Importe)
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="~/fontawesome/js/all.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+                $('#Propios').DataTable({
+            "searching": false
+        });
+        $('#Franquicias').DataTable({
+            "searching": false
+        });
+        $('#Ecommerce').DataTable({
+            "searching": false
+        });
+    </script>
+}

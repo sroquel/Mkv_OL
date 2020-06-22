@@ -33,11 +33,15 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" asp-area="" asp-controller="Internos" asp-action="Index">Internos</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="StocksLocales" asp-action="Index">Stocks Locales</a>
-                        @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel")
-                        {
-                            <a class="dropdown-item" asp-area="" asp-controller="Sectores" asp-action="Index">Sectores</a>
-                        }
-</div>
+                                @if (User.IsInRole("MARKOVA\\Gerentes") | User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin")
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="VentaDiaria" asp-action="Index">Venta Diaria</a>
+                                }
+                                @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel")
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Sectores" asp-action="Index">Sectores</a>
+                                }
+                            </div>
                     </ul>
                 </div>
             </div>
@@ -49,7 +53,7 @@
         </main>
     </div>
 
-  
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
