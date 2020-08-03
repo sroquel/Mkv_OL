@@ -35,14 +35,26 @@
                                 <a class="dropdown-item" asp-area="" asp-controller="StocksLocales" asp-action="Index">Stocks Locales</a>
                                 @if (User.IsInRole("MARKOVA\\Gerentes") | User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin")
                                 {
-                                    <a class="dropdown-item" asp-area="" asp-controller="VentaDiaria" asp-action="Index">Venta Diaria</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="VentaDiaria" asp-action="Index">Venta Diaria</a>
+                                }
+                                @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel" | User.Identity.Name == "MARKOVA\\lucas.oclander" )
+                                {
+                                <a class="dropdown-item" asp-area="" asp-controller="StockEcommerce" asp-action="Index">Stock Web Ecommerce</a>
                                 }
                                 @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel")
                                 {
-                                    <a class="dropdown-item" asp-area="" asp-controller="Sectores" asp-action="Index">Sectores</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Sectores" asp-action="Index">Sectores</a>
                                 }
                             </div>
+                        </li>
+                        @if (User.IsInRole("MARKOVA\\Gerentes") | User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="DashVenta" asp-action="Index">Dashboard</a>
+                            </li>
+                        }
                     </ul>
+                  
                 </div>
             </div>
         </nav>

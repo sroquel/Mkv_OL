@@ -1,0 +1,362 @@
+﻿@model IEnumerable<MkvOL.Data.Entities.DashVentaEntity>
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<link rel="stylesheet" href="~/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+<form id="prueba" asp-controller="DashVenta" method="post" class="form-control" role="form">
+    <label>Fecha</label>
+    <input type="date" id="fecha" name="fechaConsulta" width="276" value=@ViewData["Fecha"] />
+    <button type="submit">Aceptar</button>
+</form>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">TOTALES</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Totales" class="display-compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                TOTALES
+                            </th>
+                            <th style="text-align:right">
+                                Propios y eCommerce
+                            </th>
+                            <th style="text-align:right">
+                                Consignaciones
+                            </th>
+                            <th style="text-align:right">
+                                Total
+                            </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Del Dia
+                            </td>
+                            <td style="text-align:right">
+                                @ViewData["TotalPropios"]
+                            </td>
+                            <td style="text-align:right">
+                                @ViewData["TotalConsignacion"]
+                            </td>
+                            <td style="text-align:right">
+                                @ViewData["TotalDia"]
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Acumulado
+                            </td>
+                            <td style="text-align:right">
+                                @ViewData["AcumPropios"]
+                            </td>
+                            <td style="text-align:right">
+                                @ViewData["AcumConsignacion"]
+                            </td>
+                            <td style="text-align:right">
+                                @ViewData["TotalAcum"]
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Propios</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Propios" class="display-compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sucursal)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Pronostico)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.VentaDia)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.VentaAnt)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.PronAcum)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Acumulado)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.AcumAnt)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.CoSucursal > 100 & item.CoSucursal < 200)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sucursal)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Pronostico)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.VentaDia)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.VentaAnt)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.PronAcum)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Acumulado)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.AcumAnt)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">eCommerce</h4>
+            </div>
+            <div class="panel-body">
+                <table id="eCommerce" class="display-compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sucursal)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Pronostico)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.VentaDia)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.VentaAnt)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.PronAcum)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Acumulado)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.AcumAnt)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.CoSucursal == 80)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sucursal)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Pronostico)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.VentaDia)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.VentaAnt)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.PronAcum)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Acumulado)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.AcumAnt)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Consignaciones</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Consignaciones" class="display-compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sucursal)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Pronostico)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.VentaDia)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.VentaAnt)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.PronAcum)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Acumulado)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.AcumAnt)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.Consignacion == true)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sucursal)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Pronostico)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.VentaDia)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.VentaAnt)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.PronAcum)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Acumulado)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.AcumAnt)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Franquicias</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Fanquicias" class="display-compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Sucursal)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Pronostico)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.VentaDia)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.VentaAnt)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.PronAcum)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Acumulado)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.AcumAnt)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.Consignacion == false & item.Franquicia == true)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sucursal)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Pronostico)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.VentaDia)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.VentaAnt)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.PronAcum)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Acumulado)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.AcumAnt)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-3.3.1.js")" type="text/javascript"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="~/DataTables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+}

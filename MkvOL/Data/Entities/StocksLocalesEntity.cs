@@ -33,7 +33,8 @@ namespace MkvOL.Data.Entities
         public decimal Palmas { get; set; }
         public decimal NvoCentro { get; set; }
         public decimal CbaShop { get; set; }
-
+        public decimal Recoleta { get; set; }
+        public decimal Rosario { get; set; }
 
     }
 }
