@@ -1,0 +1,28 @@
+﻿@model MkvOL.Data.Entities.DespachosEntity 
+
+@{
+    ViewBag.Title = "Consulta Despachos";
+}
+
+<h2>Status Pedido</h2>
+
+@ViewBag.Error
+
+@using (Html.BeginForm("Index", "Despachos", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <h4>No Pedido/Seguimiento</h4>
+            <div class="col-md-10">
+                @Html.TextBox("pedido")
+                <button type="submit">Aceptar</button>
+            </div>
+        </div>
+
+
+    </div>
+}

@@ -1,17 +1,22 @@
 ﻿@model IEnumerable<MkvOL.Data.Entities.InternosEntity>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Internos";
 }
 
+<h1>Internos</h1>
+
 @*Con bootstrap 4*@
-<link rel="stylesheet" href="~/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" media="screen"/>
+<link rel="stylesheet" href="~/DataTables/DataTables-1.10.22/css/jquery.dataTables.min.css" />
+@*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" media="screen"/>*@
+<link rel="stylesheet" href="~/DataTables/Bootstrap-4-4.1.1/css/bootstrap.min.css" media="screen" />
 
-
-<p>
-    <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i>Create New</a>
-</p>
+@if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\SBS-Admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel")
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i>Create New</a>
+    </p>
+}
 <div class="row">
     <div class="col-md-12">
         <div class="panel navbar-expand-md">
@@ -37,28 +42,30 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NroInterno)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Usuario)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Celular)
-                            </td>
-                            @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\SBS-Admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel")
-                            {
+                            <tr>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class=" btn btn-warning"><i class="fas fa-pen"></i></a>
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-align-justify"></i></a>|
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    @Html.DisplayFor(modelItem => item.NroInterno)
                                 </td>
-                            }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Usuario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Celular)
+                                </td>
+                                @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\SBS-Admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel")
+                                {
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class=" btn btn-warning"><i class="fas fa-pen"></i></a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-align-justify"></i></a>|
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    </td>
+                                }
                             </tr>
+
                         }
                     </tbody>
                 </table>
+
             </div>
         </div>
     </div>
@@ -66,7 +73,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="~/DataTables/DataTables-1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="~/fontawesome/js/all.min.js"></script>
 
     <script type="text/javascript">

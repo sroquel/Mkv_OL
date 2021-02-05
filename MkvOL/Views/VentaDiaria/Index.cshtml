@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Venta Diaria";
 }
-<link rel="stylesheet" href="~/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="~/DataTables/DataTables-1.10.22/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/DataTables/Bootstrap-4-4.1.1/css/bootstrap.css" />
 
 <form id="prueba" asp-controller="VentaDiaria" method="post" class="form-control" role="form">
     <label>Fecha</label>
@@ -20,13 +21,13 @@
                 <h4 class="panel-title">Propios</h4>
             </div>
             <div class="panel-body">
-                <table id="Propios" class="display-compact  table-striped table-bordered" style="width:100%">
+                <table id="Propios" class="display-compact table-striped table-bordered " style="width:100%">
                     <thead>
                         <tr>
-                            <th>
+                            <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.Sucursal)
                             </th>
-                            <th>
+                            <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.Importe)
                             </th>
 
@@ -47,7 +48,6 @@
                                 </tr>
                             }
                         }
-
                     </tbody>
                 </table>
             </div>
@@ -63,10 +63,10 @@
                 <table id="Franquicias" class="display-compact table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
-                            <th>
+                            <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.Sucursal)
                             </th>
-                            <th>
+                            <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.Importe)
                             </th>
 
@@ -102,10 +102,10 @@
                 <table id="Ecommerce" class="display-compact table-bordered" style="width:100%">
                     <thead>
                         <tr>
-                            <th>
+                            <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.Sucursal)
                             </th>
-                            <th>
+                            <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.Importe)
                             </th>
 
@@ -114,7 +114,7 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            if (item.CoSucursal == 80)
+                            if (item.CoSucursal == 80 | item.CoSucursal == 1080)
                             {
                                 <tr>
                                     <td>
@@ -126,28 +126,35 @@
                                 </tr>
                             }
                         }
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script src="~/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="~/DataTables/DataTables-1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
     <script src="~/fontawesome/js/all.min.js"></script>
+    <script src="~/js/site.js"></script>
     <script type="text/javascript">
-        $(document).ready(function ()
-                $('#Propios').DataTable({
-            "searching": false
-        });
-        $('#Franquicias').DataTable({
-            "searching": false
-        });
-        $('#Ecommerce').DataTable({
-            "searching": false
-        });
+        $(document).ready(function () {
+            $('#Propios').DataTable({
+                "searching": false
+            });
+            $('#Franquicias').DataTable({
+                "searching": false
+            });
+            $('#Ecommerce').DataTable({
+                "searching": false
+            });
+        };
     </script>
+
+
 }
+

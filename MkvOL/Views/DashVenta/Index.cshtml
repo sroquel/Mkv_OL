@@ -4,8 +4,8 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<link rel="stylesheet" href="~/DataTables/DataTables-1.10.20/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/DataTables/DataTables-1.10.22/css/jquery.dataTables.min.css" />
+
 
 <form id="prueba" asp-controller="DashVenta" method="post" class="form-control" role="form">
     <label>Fecha</label>
@@ -178,7 +178,7 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            if (item.CoSucursal == 80)
+                            if (item.CoSucursal == 80 | item.CoSucursal == 1080)
                             {
                                 <tr>
                                     <td>
@@ -351,12 +351,12 @@
         </div>
     </div>
 </div>
-<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery-3.3.1.js")" type="text/javascript"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/DataTables/DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="~/DataTables/DataTables-1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/DataTables/DataTables-1.10.22/js/jquery.dataTables.min.js"></script>
 
+
+    
 }

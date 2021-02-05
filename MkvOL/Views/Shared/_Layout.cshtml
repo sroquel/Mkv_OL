@@ -33,28 +33,31 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" asp-area="" asp-controller="Internos" asp-action="Index">Internos</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="StocksLocales" asp-action="Index">Stocks Locales</a>
-                                @if (User.IsInRole("MARKOVA\\Gerentes") | User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin")
+                                @if (User.IsInRole("MARKOVA\\Gerentes") | User.IsInRole("MARKOVA\\Comercial") | User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin")
                                 {
-                                <a class="dropdown-item" asp-area="" asp-controller="VentaDiaria" asp-action="Index">Venta Diaria</a>
-                                }
-                                @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel" | User.Identity.Name == "MARKOVA\\lucas.oclander" )
-                                {
-                                <a class="dropdown-item" asp-area="" asp-controller="StockEcommerce" asp-action="Index">Stock Web Ecommerce</a>
-                                }
-                                @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel")
-                                {
-                                <a class="dropdown-item" asp-area="" asp-controller="Sectores" asp-action="Index">Sectores</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="VentaDiaria" asp-action="Index">Venta Diaria</a>
                                 }
                             </div>
                         </li>
-                        @if (User.IsInRole("MARKOVA\\Gerentes") | User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin")
+                        @if (User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin" | User.Identity.Name == "MARKOVA\\Sergio.Roquel" | User.IsInRole("MARKOVA\\Ecommerce"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbardrop" data-toggle="dropdown">Ecommerce</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-area="" asp-controller="StockEcommerce" asp-action="Index">Stock Web Ecommerce</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Despachos" asp-action="Index">Status Pedidos</a>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole("MARKOVA\\Gerentes") | User.IsInRole("MARKOVA\\Comercial") | User.Identity.Name == "MSI\\Sergio" | User.Identity.Name == "MARKOVA\\sbs-admin")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="DashVenta" asp-action="Index">Dashboard</a>
                             </li>
                         }
+
                     </ul>
-                  
+
                 </div>
             </div>
         </nav>

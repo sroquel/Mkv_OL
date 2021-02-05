@@ -28,7 +28,10 @@ namespace MkvOL.Controllers
                 CoArticulo = "",
                 CoBarra = "",
                 Descripcion = "",
-                Stock = 0
+                Stock = 0,
+                Outlet=0,
+                Precio=0,
+                Historico=0
             } };
             return View(stock);
         }
