@@ -1,0 +1,192 @@
+﻿@model IEnumerable<MkvOL.Data.Entities.StocksFranquiciasEntity>
+
+@{
+    ViewData["Title"] = "Listar Stocks Franquicias";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.3.2/css/fixedColumns.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.bootstrap4.min.css">
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Stocks Franquicias</h3>
+            </div>
+            <div class="panel-body">
+                <table id="stocks" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CoBarra)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.BBlanca)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Corrientes)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Jockey)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Jujuy)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Lomitas)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Toscas)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Lomas)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MDQ)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Martinez)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MzaPlaza)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Comahue)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Patagonia)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Palmares)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Quilmes)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Salta)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SanJuan)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TucuPortal)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TucuCentro)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td { white-space: nowrap; }
+                                div.dataTables_wrapper {
+                                width: 800px;
+                                margin: 0 auto; }>
+                                @Html.DisplayFor(modelItem => item.CoBarra)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.BBlanca)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Corrientes)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Jockey)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Jujuy)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Lomitas)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Toscas)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Lomas)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.MDQ)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Martinez)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.MzaPlaza)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Comahue)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Patagonia)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Palmares)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Quilmes)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Salta)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.SanJuan)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.TucuPortal)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.TucuCentro)
+                            </td>
+                        </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-success">Back to Select Code</a>
+</div>
+
+
+<script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.bootstrap4.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var table = $('#stocks').DataTable({
+                scrollX: true,
+                fixedColumns: true,
+                //lengthChange: false,
+                buttons: ['copy', 'excel', 'colvis']
+            });
+
+            table.buttons().container()
+                .appendTo('#stocks_wrapper .col-sm-6:eq(0)');
+        });
+
+    </script>
+
+}

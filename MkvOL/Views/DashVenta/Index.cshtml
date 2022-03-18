@@ -4,7 +4,7 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<link rel="stylesheet" href="~/DataTables/DataTables-1.10.22/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
 
 
 <form id="prueba" asp-controller="DashVenta" method="post" class="form-control" role="form">
@@ -20,7 +20,7 @@
                 <h4 class="panel-title">TOTALES</h4>
             </div>
             <div class="panel-body">
-                <table id="Totales" class="display-compact  table-striped table-bordered" style="width:100%">
+                <table id="Totales" class="display compact  table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>
@@ -42,7 +42,7 @@
                                 Del Dia
                             </td>
                             <td style="text-align:right">
-                                @ViewData["TotalPropios"]
+                                @ViewData["TotalPropiosEcom"]
                             </td>
                             <td style="text-align:right">
                                 @ViewData["TotalConsignacion"]
@@ -56,7 +56,7 @@
                                 Acumulado
                             </td>
                             <td style="text-align:right">
-                                @ViewData["AcumPropios"]
+                                @ViewData["AcumPropiosEcom"]
                             </td>
                             <td style="text-align:right">
                                 @ViewData["AcumConsignacion"]
@@ -79,7 +79,7 @@
                 <h4 class="panel-title">Propios</h4>
             </div>
             <div class="panel-body">
-                <table id="Propios" class="display-compact  table-striped table-bordered" style="width:100%">
+                <table id="Propios" class="display compact  table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>
@@ -92,6 +92,9 @@
                                 @Html.DisplayNameFor(model => model.VentaDia)
                             </th>
                             <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Cumplim)
+                            </th>
+                            <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.VentaAnt)
                             </th>
                             <th style="text-align:right">
@@ -99,6 +102,9 @@
                             </th>
                             <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.Acumulado)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.CumplimAcum)
                             </th>
                             <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.AcumAnt)
@@ -118,7 +124,10 @@
                                         @Html.DisplayFor(modelItem => item.Pronostico)
                                     </td>
                                     <td style="text-align:right">
-                                        @Html.DisplayFor(modelItem => item.VentaDia)
+                                        @Html.DisplayFor(model => item.VentaDia)
+                                    </td>
+                                    <td style="text-align:right">
+                                        % @Html.DisplayFor(model => item.Cumplim)
                                     </td>
                                     <td style="text-align:right">
                                         @Html.DisplayFor(modelItem => item.VentaAnt)
@@ -130,12 +139,28 @@
                                         @Html.DisplayFor(modelItem => item.Acumulado)
                                     </td>
                                     <td style="text-align:right">
+                                        % @Html.DisplayFor(model => item.CumplimAcum)
+                                    </td>
+                                    <td style="text-align:right">
                                         @Html.DisplayFor(modelItem => item.AcumAnt)
                                     </td>
                                 </tr>
                             }
                         }
                     </tbody>
+                    <tfoot style="font-weight:bold">
+                        <tr>
+                            <td>Totales</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalPronPropios"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalDiaPropios"])</td>
+                            <td style="text-align:right">% @string.Format("{0:N0}", ViewData["TotalCumplDiaPropios"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalDiaAnioAntPropios"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["PronAcumPropios"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["AcumPropios"])</td>
+                            <td style="text-align:right">% @string.Format("{0:N0}", ViewData["CumplAcumPropios"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalAcumAnioAntPropios"])</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -149,7 +174,7 @@
                 <h4 class="panel-title">eCommerce</h4>
             </div>
             <div class="panel-body">
-                <table id="eCommerce" class="display-compact  table-striped table-bordered" style="width:100%">
+                <table id="eCommerce" class="display compact  table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>
@@ -162,6 +187,9 @@
                                 @Html.DisplayNameFor(model => model.VentaDia)
                             </th>
                             <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Cumplim)
+                            </th>
+                            <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.VentaAnt)
                             </th>
                             <th style="text-align:right">
@@ -169,6 +197,9 @@
                             </th>
                             <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.Acumulado)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.CumplimAcum)
                             </th>
                             <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.AcumAnt)
@@ -188,7 +219,10 @@
                                         @Html.DisplayFor(modelItem => item.Pronostico)
                                     </td>
                                     <td style="text-align:right">
-                                        @Html.DisplayFor(modelItem => item.VentaDia)
+                                        @Html.DisplayFor(model => item.VentaDia)
+                                    </td>
+                                    <td style="text-align:right">
+                                        % @Html.DisplayFor(model => item.Cumplim)
                                     </td>
                                     <td style="text-align:right">
                                         @Html.DisplayFor(modelItem => item.VentaAnt)
@@ -200,12 +234,28 @@
                                         @Html.DisplayFor(modelItem => item.Acumulado)
                                     </td>
                                     <td style="text-align:right">
+                                        % @Html.DisplayFor(model => item.CumplimAcum)
+                                    </td>
+                                    <td style="text-align:right">
                                         @Html.DisplayFor(modelItem => item.AcumAnt)
                                     </td>
                                 </tr>
                             }
                         }
                     </tbody>
+                    <tfoot style="font-weight:bold">
+                        <tr>
+                            <td>Totales</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalPronEcommerce"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalEcommerce"])</td>
+                            <td style="text-align:right">% @string.Format("{0:N0}", ViewData["TotalCumplDiaEcommerce"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalDiaAnioAntEcommerce"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["PronAcumEcommerce"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["AcumEcommerce"])</td>
+                            <td style="text-align:right">% @string.Format("{0:N0}", ViewData["CumplAcumEcommerce"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalAcumAnioAntEcommerce"])</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -219,7 +269,7 @@
                 <h4 class="panel-title">Consignaciones</h4>
             </div>
             <div class="panel-body">
-                <table id="Consignaciones" class="display-compact  table-striped table-bordered" style="width:100%">
+                <table id="Consignaciones" class="display compact  table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>
@@ -232,6 +282,9 @@
                                 @Html.DisplayNameFor(model => model.VentaDia)
                             </th>
                             <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Cumplim)
+                            </th>
+                            <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.VentaAnt)
                             </th>
                             <th style="text-align:right">
@@ -239,6 +292,9 @@
                             </th>
                             <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.Acumulado)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.CumplimAcum)
                             </th>
                             <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.AcumAnt)
@@ -258,7 +314,10 @@
                                         @Html.DisplayFor(modelItem => item.Pronostico)
                                     </td>
                                     <td style="text-align:right">
-                                        @Html.DisplayFor(modelItem => item.VentaDia)
+                                        @Html.DisplayFor(model => item.VentaDia)
+                                    </td>
+                                    <td style="text-align:right">
+                                        % @Html.DisplayFor(model => item.Cumplim)
                                     </td>
                                     <td style="text-align:right">
                                         @Html.DisplayFor(modelItem => item.VentaAnt)
@@ -270,12 +329,28 @@
                                         @Html.DisplayFor(modelItem => item.Acumulado)
                                     </td>
                                     <td style="text-align:right">
+                                        % @Html.DisplayFor(model => item.CumplimAcum)
+                                    </td>
+                                    <td style="text-align:right">
                                         @Html.DisplayFor(modelItem => item.AcumAnt)
                                     </td>
                                 </tr>
                             }
                         }
                     </tbody>
+                    <tfoot style="font-weight:bold">
+                        <tr>
+                            <td>Totales</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalPronConsignacion"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalConsignacion"])</td>
+                            <td style="text-align:right">% @string.Format("{0:N0}", ViewData["TotalCumplDiaConsignacion"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalDiaAnioAntConsignacion"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["PronAcumConsignacion"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["AcumConsignacion"])</td>
+                            <td style="text-align:right">% @string.Format("{0:N0}", ViewData["CumplAcumConsignacion"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalAcumAnioAntConsignacion"])</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -289,7 +364,7 @@
                 <h4 class="panel-title">Franquicias</h4>
             </div>
             <div class="panel-body">
-                <table id="Fanquicias" class="display-compact  table-striped table-bordered" style="width:100%">
+                <table id="Franquicias" class="display compact  table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>
@@ -302,6 +377,9 @@
                                 @Html.DisplayNameFor(model => model.VentaDia)
                             </th>
                             <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.Cumplim)
+                            </th>
+                            <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.VentaAnt)
                             </th>
                             <th style="text-align:right">
@@ -309,6 +387,9 @@
                             </th>
                             <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.Acumulado)
+                            </th>
+                            <th style="text-align:right">
+                                @Html.DisplayNameFor(model => model.CumplimAcum)
                             </th>
                             <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.AcumAnt)
@@ -328,7 +409,10 @@
                                         @Html.DisplayFor(modelItem => item.Pronostico)
                                     </td>
                                     <td style="text-align:right">
-                                        @Html.DisplayFor(modelItem => item.VentaDia)
+                                        @Html.DisplayFor(model => item.VentaDia)
+                                    </td>
+                                    <td style="text-align:right">
+                                        % @Html.DisplayFor(model => item.Cumplim)
                                     </td>
                                     <td style="text-align:right">
                                         @Html.DisplayFor(modelItem => item.VentaAnt)
@@ -340,12 +424,28 @@
                                         @Html.DisplayFor(modelItem => item.Acumulado)
                                     </td>
                                     <td style="text-align:right">
+                                        % @Html.DisplayFor(model => item.CumplimAcum)
+                                    </td>
+                                    <td style="text-align:right">
                                         @Html.DisplayFor(modelItem => item.AcumAnt)
                                     </td>
                                 </tr>
                             }
                         }
                     </tbody>
+                    <tfoot style="font-weight:bold">
+                        <tr>
+                            <td>Totales</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalPronFranquicias"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalFranquicias"])</td>
+                            <td style="text-align:right">% @string.Format("{0:N0}", ViewData["TotalCumplDiaFranquicias"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalDiaAnioAntFranquicias"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["PronAcumFranquicias"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["AcumFranquicias"])</td>
+                            <td style="text-align:right">% @string.Format("{0:N0}", ViewData["CumplAcumFranquicias"])</td>
+                            <td style="text-align:right">@string.Format("{0:C0}", ViewData["TotalAcumAnioAntFranquicias"])</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -355,8 +455,68 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/Scripts/jquery-3.5.1.js"></script>
-    <script src="~/DataTables/DataTables-1.10.22/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Propios').DataTable(
+                {
+                    'rowCallback': function (row, data, index) {
+                        if (data[3] < 0) {
+                            $('td:eq(3)', row).css('baclground-color', 'red');
+                        }
 
-    
+                    },
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+
+            );
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Totales').DataTable(
+                {
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+            );
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#eCommerce').DataTable(
+                {
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+            );
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Consignaciones').DataTable(
+                {
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+            );
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Franquicias').DataTable(
+                {
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+            );
+        });
+    </script>
 }

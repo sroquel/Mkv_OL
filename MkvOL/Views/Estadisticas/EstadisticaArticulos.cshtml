@@ -1,0 +1,313 @@
+﻿@model IEnumerable<MkvOL.Data.Entities.EstadisticaAnualEntity>
+
+@{
+    ViewData["Title"] = "Estadistica de Articulos";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" />
+
+
+<form class="row" method="post">
+    <div class="col-sm-4">
+        <label>Año Actual</label>
+        <input type="text" id="Actual" name="Anio" width="276" value=@ViewData["Anio"] />
+    </div>
+    <div class="col-sm-4">
+        <label>Año Anterior</label>
+        <input type="text" id="Anterior" name="AnioAnt" width="276" value=@ViewData["AnioAnt"] />
+        <button type="submit">Aceptar</button>
+    </div>
+</form>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Propios</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Propios" class="display compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Sucursal</th>
+                            <th colspan="3" style="text-align:center">Articulos</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align:center">@ViewData["AnioAnt"] </th>
+                            <th style="text-align:center">@ViewData["Anio"]</th>
+                            <th style="text-align:center">Var</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.CoSucursal > 100 & item.CoSucursal < 200)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-action="SucDetailArtic" asp-route-id="@item.CoSucursal" asp-route-Anio="@ViewData["Anio"]" asp-route-AnioAnt="@ViewData["AnioAnt"]">@Html.DisplayFor(modelItem => item.Nombre)</a>
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.ArticAnt)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Articulos)
+                                    </td>
+                                    <td style="text-align:right">
+                                        % @Html.DisplayFor(modelItem => item.VarArtic)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot style="font-weight:bold">
+                    <td>Totales</td>
+                    <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalArticPropiosAnt"])</td>
+                    <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalArticulosPropios"])</td>
+                    <td style="text-align:right">% @string.Format("{0:N0}", ViewData["VarArticPropios"])</td>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">eCommerce</h4>
+            </div>
+            <div class="panel-body">
+                <table id="eCommerce" class="display compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Sucursal</th>
+                            <th colspan="3" style="text-align:center">Articulos</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align:center">@ViewData["AnioAnt"] </th>
+                            <th style="text-align:center">@ViewData["Anio"]</th>
+                            <th style="text-align:center">Var</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.CoSucursal == 80 | item.CoSucursal == 1080)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-action="SucDetailArtic" asp-route-id="@item.CoSucursal" asp-route-Anio="@ViewData["Anio"]" asp-route-AnioAnt="@ViewData["AnioAnt"]">@Html.DisplayFor(modelItem => item.Nombre)</a>
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.ArticAnt)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Articulos)
+                                    </td>
+                                    <td style="text-align:right">
+                                        % @Html.DisplayFor(modelItem => item.VarArtic)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot style="font-weight:bold">
+                    <td>Totales</td>
+                    <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalArticEcommerceAnt"])</td>
+                    <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalArticulosEcommerce"])</td>
+                    <td style="text-align:right">% @string.Format("{0:N0}", ViewData["VarArticEcommerce"])</td>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Consignaciones</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Consignaciones" class="display compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Sucursal</th>
+                            <th colspan="3" style="text-align:center">Articulos</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align:center">@ViewData["AnioAnt"] </th>
+                            <th style="text-align:center">@ViewData["Anio"]</th>
+                            <th style="text-align:center">Var</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.Consignacion == true)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-action="SucDetailArtic" asp-route-id="@item.CoSucursal" asp-route-Anio="@ViewData["Anio"]" asp-route-AnioAnt="@ViewData["AnioAnt"]">@Html.DisplayFor(modelItem => item.Nombre)</a>
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.ArticAnt)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Articulos)
+                                    </td>
+                                    <td style="text-align:right">
+                                        % @Html.DisplayFor(modelItem => item.VarArtic)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot style="font-weight:bold">
+                    <td>Totales</td>
+                    <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalArticConsigAnt"])</td>
+                    <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalArticulosConsig"])</td>
+                    <td style="text-align:right">% @string.Format("{0:N0}", ViewData["VarArticConsig"])</td>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Franquicias</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Franquicias" class="display compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Sucursal</th>
+                            <th colspan="3" style="text-align:center">Articulos</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align:center">@ViewData["AnioAnt"] </th>
+                            <th style="text-align:center">@ViewData["Anio"]</th>
+                            <th style="text-align:center">Var</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.Consignacion == false & item.Franquicia == true)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-action="SucDetailArtic" asp-route-id="@item.CoSucursal" asp-route-Anio="@ViewData["Anio"]" asp-route-AnioAnt="@ViewData["AnioAnt"]">@Html.DisplayFor(modelItem => item.Nombre)</a>
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.ArticAnt)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(modelItem => item.Articulos)
+                                    </td>
+                                    <td style="text-align:right">
+                                        % @Html.DisplayFor(modelItem => item.VarArtic)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot style="font-weight:bold">
+                    <td>Totales</td>
+                    <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalArticFranqAnt"])</td>
+                    <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalArticulosFranq"])</td>
+                    <td style="text-align:right">% @string.Format("{0:N0}", ViewData["VarArticFranq"])</td>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Propios').DataTable(
+                {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5'
+                    ],
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+            );
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#eCommerce').DataTable(
+                {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5'
+                    ],
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+            );
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Consignaciones').DataTable(
+                {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5'
+                    ],
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+            );
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Franquicias').DataTable(
+                {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5'
+                    ],
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+            );
+        });
+    </script>
+}

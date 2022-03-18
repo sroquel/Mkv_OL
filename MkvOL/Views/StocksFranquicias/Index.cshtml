@@ -1,0 +1,29 @@
+﻿@model MkvOL.Data.Entities.StocksFranquiciasEntity
+
+@{
+    ViewBag.Title = "Stocks Franquicias";
+}
+
+<h2>Stocks Franquicias</h2>
+
+@ViewBag.Error
+
+@using (Html.BeginForm("Index", "StocksFranquicias", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CoBarra, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("pCodigo")
+                <button type="submit">Aceptar</button>
+            </div>
+        </div>
+
+
+    </div>
+}
+

@@ -21,7 +21,7 @@ namespace MkvOL.Data.Entities
         public decimal Poeste { get; set; }
         public decimal Unicenter { get; set; }
         public decimal Caballito { get; set; }
-        public decimal Micro { get; set; }
+        public decimal Tom { get; set; }
         public decimal Pacifico { get; set; }
         public decimal Soleil { get; set; }
         public decimal AltoP { get; set; }

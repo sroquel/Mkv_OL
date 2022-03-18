@@ -1,0 +1,26 @@
+﻿@model IEnumerable<MkvOL.Data.Entities.EstadisticaVendedoraEntity>
+
+@{
+    ViewData["Title"] = "Estadisticas Vendedores";
+    List<SelectListItem> depos = (List<SelectListItem>)ViewBag.Depositos;
+}
+@{
+    ViewData["Title"] = "Venta Vendedoras";
+}
+
+<link rel="stylesheet" href="~/DataTables/DataTables-1.10.22/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/DataTables/Bootstrap-4-4.1.1/css/bootstrap.css" />
+
+<form id="prueba" asp-controller="Estadisticas" method="post" class="input-group" role="form">
+    <div class="input-group mb-3 col-md-4">
+        <span class="input-group-text" id="basic-addon1">Sucursal: </span>
+        @Html.DropDownList("selectedBase", depos, "Selecciona", new { @class = "form-control" })
+    </div>
+    <p></p>
+    <div class="input-group mb-3 col-md-8">
+        <span class="input-group-text">Desde Fecha</span><input type="date" name="FechaDde" class="form-control" aria-label="Desde Fecha:" aria-describedby="basic-addon2" value=@ViewData["FechaDde"]>
+        <span class="input-group-text">Hasta Fecha:</span><input type="date" name="FechaHta" class="form-control" aria-label="Hasta Fecha:" aria-describedby="basic-addon2" value=@ViewData["FechaHta"]>
+        <button type="submit">Aceptar</button>
+    </div>
+</form>

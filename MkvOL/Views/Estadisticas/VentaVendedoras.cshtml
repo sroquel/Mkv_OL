@@ -1,0 +1,282 @@
+﻿@model IEnumerable<MkvOL.Data.Entities.EstadisticaVendedoraEntity>
+
+@{
+    ViewData["Title"] = "Estadisticas Vendedores";
+    List<SelectListItem> depos = (List<SelectListItem>)ViewBag.Depositos;
+}
+
+<link rel="stylesheet" href="~/DataTables/DataTables-1.10.22/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/DataTables/Bootstrap-4-4.1.1/css/bootstrap.css" />
+
+@{
+    ViewData["Title"] = "Venta Vendedoras";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Estadisticas</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Estadisticas" class="display compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Semana)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.CoVendedor)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.Unidades)
+                            </th>
+                            <th style="text-align: center ">
+                                @Html.DisplayNameFor(model => model.Tickets)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.Importe)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.ArtXTk)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.TkPromedio)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int semanaAct = 0;
+                            int semanaAnt = 0;
+                            double totalArticulos = 0;
+                            double totalTickets = 0;
+                            double totalTkPromedio = 0;
+                            double totalArtxTk = 0;
+                            double totalImportes = 0;
+
+                            foreach (var item in Model)
+                            {
+                                semanaAct = item.Semana;
+
+                                if (semanaAnt != semanaAct && semanaAnt != 0)
+                                {
+                                    totalTkPromedio = 0;
+                                    totalArtxTk = 0;
+                                    if (totalTickets != 0)
+                                    {
+                                        totalTkPromedio = totalImportes / totalTickets;
+                                        totalArtxTk = totalArticulos / totalTickets;
+                                    }
+                                    <tr style="font-weight:bold">
+                                        <td>Totales</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:right">@totalArticulos</td>
+                                        <td style="text-align:right">@totalTickets</td>
+                                        <td style="text-align:right">@string.Format("{0:C2}", totalImportes)</td>
+                                        <td style="text-align:right">@string.Format("{0:N2}", totalArtxTk)</td>
+                                        <td style="text-align:right">@string.Format("{0:C2}", totalTkPromedio)</td>
+                                    </tr>
+                                    totalArticulos = 0;
+                                    totalTickets = 0;
+                                    totalImportes = 0;
+                                }
+                                semanaAnt = semanaAct;
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(model => item.Semana)
+                                    </td>
+                                    <td style="text-align: left">
+                                        @Html.DisplayFor(model => item.CoVendedor)
+                                    </td>
+                                    <td style="text-align: left">
+                                        @Html.DisplayFor(model => item.Nombre)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(model => item.Unidades)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(model => item.Tickets)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(model => item.Importe)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(model => item.ArtXTk)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @Html.DisplayFor(model => item.TkPromedio)
+                                    </td>
+                                    @{ totalArticulos += Convert.ToDouble(item.Unidades);
+                                        totalImportes += Convert.ToDouble(item.Importe);
+                                        totalTickets += Convert.ToDouble(item.Tickets);
+
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot style="font-weight:bold">
+                        @{
+                            totalTkPromedio = 0;
+                            totalArtxTk = 0;
+                            if (totalTickets != 0)
+                            {
+                                totalTkPromedio = totalImportes / totalTickets;
+                                totalArtxTk = totalArticulos / totalTickets;
+                            }
+                        }
+                    <td>Totales</td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align:right">@totalArticulos</td>
+                    <td style="text-align:right">@totalTickets</td>
+                    <td style="text-align:right">@string.Format("{0:C2}", totalImportes)</td>
+                    <td style="text-align:right">@string.Format("{0:N2}", totalArtxTk)</td>
+                    <td style="text-align:right">@string.Format("{0:C2}", totalTkPromedio)</td>
+                    </tfoot>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p></p>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Totales</h4>
+            </div>
+            <div class="panel-body">
+                <table id="Totales" class="display compact  table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.CoVendedor)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.Unidades)
+                            </th>
+                            <th style="text-align: center ">
+                                @Html.DisplayNameFor(model => model.Tickets)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.Importe)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.ArtXTk)
+                            </th>
+                            <th style="text-align: center">
+                                @Html.DisplayNameFor(model => model.TkPromedio)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var totalventa = Model.GroupBy(v => v.CoVendedor).Select(x => (
+                                                 CoVendedor: x.GroupBy(v => v.CoVendedor),
+                                                 Semana: x.Sum(v => v.Semana),
+                                                 Nombre: x.GroupBy(v => v.Nombre),
+                                                 Importe: x.Sum(v => v.Importe),
+                                                 Tickets: x.Sum(v => v.Tickets),
+                                                 Unidades: x.Sum(v => v.Unidades)
+                                             )).ToList();
+
+                            foreach (var itemtotal in totalventa)
+                            {
+                                <tr>
+                                    @{
+                                        decimal tkProm = 0;
+                                        decimal aXt = 0;
+                                        if (itemtotal.Tickets != 0)
+                                        {
+                                            tkProm = itemtotal.Importe / itemtotal.Tickets;
+                                            aXt = itemtotal.Unidades / itemtotal.Tickets;
+                                        }
+                                    }
+                                    <td style="text-align: right">
+                                        @itemtotal.CoVendedor.FirstOrDefault().Key
+                                    </td>
+                                    <td style="text-align: left">
+                                        @itemtotal.Nombre.FirstOrDefault().Key
+                                    </td>
+                                    <td style="text-align:right">
+                                        @string.Format("{0:N0}", itemtotal.Unidades)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @string.Format("{0:N0}", itemtotal.Tickets)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @string.Format("{0:C2}", itemtotal.Importe)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @string.Format("{0:N2}", aXt)
+                                    </td>
+                                    <td style="text-align:right">
+                                        @string.Format("{0:C2}", tkProm)
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Estadisticas').DataTable(
+                {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5'
+                    ],
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false,
+                    "ordering": false
+
+                }
+
+            );
+        });
+        $(document).ready(function () {
+            $('#Totales').DataTable(
+                {
+                    dom: 'Bfrtip',
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false,
+                    "ordering": false
+
+                }
+
+            );
+        });
+    </script>
+}

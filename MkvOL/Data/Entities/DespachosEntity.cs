@@ -19,7 +19,7 @@ namespace MkvOL.Data.Entities
         [Display(Name = "Modo de Envío")]
         public string ModoEnvio { get; set; }
         [Display(Name = "Fecha Despacho")]
-        [DisplayFormat(DataFormatString = "{0:d}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime FechaDespacho { get; set; }
         public string Observaciones { get; set; }
     }

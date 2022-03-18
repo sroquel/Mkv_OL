@@ -17,8 +17,10 @@ namespace MkvOL.Data.Entities
         [DisplayFormat(DataFormatString = "{0:#0}")]
         public decimal Outlet { get; set; }
         [DisplayFormat(DataFormatString = "{0:C2}")]
+        [Display(Name ="Special Price")]
         public decimal Precio { get; set; }
         [DisplayFormat(DataFormatString = "{0:C2}")]
+        [Display(Name = "Full Price")]
         public decimal Historico { get; set; }
     }
 }

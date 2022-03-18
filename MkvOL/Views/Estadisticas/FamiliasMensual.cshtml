@@ -1,0 +1,93 @@
+﻿@model IEnumerable<MkvOL.Data.Entities.EstadisticaFamiliaEntity>
+
+@{
+    ViewData["Title"] = "Venta Articulos";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" />
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="row" class="panel-heading">
+                <div class="col-md-6">
+                    <h4 class="panel-title">@ViewData["Sucursal"]</h4>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="panel-title">@ViewData["NumeroMes"] - @ViewData["Mes"]</h4>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table id="Sucursal" class="display compact  table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th rowspan="2" colspan="2" style="text-align:center">Familia</th>
+                        <th colspan="3" style="text-align:center">Articulos</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align:center">@ViewData["AnioAnt"] </th>
+                        <th style="text-align:center">@ViewData["Anio"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.CoFamilia)
+                            </td>
+                            <td style="text-align:left">
+                                <a asp-action="DetalleFamilia" target="_blank" asp-route-Id="@ViewData["CoSucursal"]" asp-route-Anio="@ViewData["Anio"]" asp-route-AnioAnt="@ViewData["AnioAnt"]" asp-route-CoFamilia=@item.CoFamilia asp-route-MesTexto=@ViewData["Mes"] asp-route-Mes=@ViewData["NumeroMes"] asp-route-Sucursal="@ViewData["Sucursal"]">
+                                    @Html.DisplayFor(modelItem => item.Familia)
+                                </a>
+                            </td>
+                            <td style="text-align: right">
+                                @Html.DisplayFor(modelItem => item.Anio2)
+                            </td>
+                            <td style="text-align:right">
+                                @Html.DisplayFor(modelItem => item.Anio1)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot style="font-weight:bold">
+                <td></td>
+                <td><a asp-action="DetalleFamilia" target="_blank" asp-route-Id="@ViewData["CoSucursal"]" asp-route-Anio="@ViewData["Anio"]" asp-route-AnioAnt="@ViewData["AnioAnt"]" asp-route-CoFamilia=1000 asp-route-MesTexto=@ViewData["Mes"] asp-route-Mes=@ViewData["NumeroMes"] asp-route-Sucursal="@ViewData["Sucursal"]">Totales</a></td>
+                <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalAño2"])</td>
+                <td style="text-align:right">@string.Format("{0:N0}", ViewData["TotalAño1"])</td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Sucursal').DataTable(
+                {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5'
+                    ],
+                    "paging": false,
+                    "searching": false,
+                    "bInfo": false
+                }
+            );
+        });
+    </script>
+}

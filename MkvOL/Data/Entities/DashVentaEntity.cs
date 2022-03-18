@@ -13,29 +13,36 @@ namespace MkvOL.Data.Entities
         public string Sucursal { get; set; }
         public bool Franquicia { get; set; }
 
-        [DataType(DataType.Currency)]
         public bool Consignacion { get; set; }
 
-        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal Pronostico { get; set;}
 
         [Display(Name = "Venta Dia")]
-        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal VentaDia { get; set; }
 
+        [Display(Name = "% Cumpl")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
+        public decimal Cumplim { get; set; }
+
         [Display(Name = "Venta Año Ant")]
-        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal VentaAnt { get; set; }
         
         [Display(Name = "Pron. Acumulado")]
-        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal PronAcum { get; set; }
 
-        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal Acumulado { get; set; }
 
+        [Display(Name = "% Cumpl Acum")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
+        public decimal CumplimAcum { get; set; }
+
         [Display(Name = "Acum Año Ant")]
-        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal AcumAnt { get; set; }
 
 
